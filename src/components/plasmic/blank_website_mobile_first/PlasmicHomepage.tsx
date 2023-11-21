@@ -39,10 +39,10 @@ import {
   deriveRenderOpts,
   ensureGlobalVariants
 } from "@plasmicapp/react-web";
+import { Timer } from "@plasmicpkgs/plasmic-basic-components";
 import Button from "../../Button"; // plasmic-import: HmiTUqbgwpvc/component
 import Bubble from "../../Bubble"; // plasmic-import: DZxGYdaUeOO7/component
 import TextInput from "../../TextInput"; // plasmic-import: cJN_OkWw8mUp/component
-import { Timer } from "@plasmicpkgs/plasmic-basic-components";
 import { Fetcher } from "@plasmicapp/react-web/lib/data-sources";
 
 import { useScreenVariants as useScreenVariantsrpL3ZAs942Ye } from "./PlasmicGlobalVariant__Screen"; // plasmic-import: RpL3zAs942YE/globalVariant
@@ -70,11 +70,11 @@ export const PlasmicHomepage__ArgProps = new Array<ArgPropType>();
 export type PlasmicHomepage__OverridesType = {
   root?: p.Flex<"div">;
   section?: p.Flex<"section">;
+  timer?: p.Flex<typeof Timer>;
   bubble?: p.Flex<typeof Bubble>;
   textInput?: p.Flex<typeof TextInput>;
   svg?: p.Flex<"svg">;
   send?: p.Flex<typeof Button>;
-  timer?: p.Flex<typeof Timer>;
 };
 
 export interface DefaultHomepageProps {
@@ -177,6 +177,39 @@ function PlasmicHomepage__RenderFunc(props: {
             data-plasmic-override={overrides.section}
             className={classNames(projectcss.all, sty.section)}
           >
+            <Timer
+              data-plasmic-name={"timer"}
+              data-plasmic-override={overrides.timer}
+              className={classNames("__wab_instance", sty.timer)}
+              intervalSeconds={1}
+              isRunning={true}
+              onTick={async () => {
+                const $steps = {};
+
+                $steps["airtableGetList"] = true
+                  ? (() => {
+                      const actionArgs = {
+                        queryInvalidation: ["plasmic_refresh_all"]
+                      };
+                      return (async ({ queryInvalidation }) => {
+                        if (!queryInvalidation) {
+                          return;
+                        }
+                        await plasmicInvalidate(queryInvalidation);
+                      })?.apply(null, [actionArgs]);
+                    })()
+                  : undefined;
+                if (
+                  $steps["airtableGetList"] != null &&
+                  typeof $steps["airtableGetList"] === "object" &&
+                  typeof $steps["airtableGetList"].then === "function"
+                ) {
+                  $steps["airtableGetList"] = await $steps["airtableGetList"];
+                }
+              }}
+              runWhileEditing={false}
+            />
+
             <div
               className={classNames(
                 projectcss.all,
@@ -341,121 +374,140 @@ function PlasmicHomepage__RenderFunc(props: {
                 : true
             ) ? (
               <div className={classNames(projectcss.all, sty.freeBox___8YSnH)}>
-                <p.Stack
-                  as={"div"}
-                  hasGap={true}
-                  className={classNames(projectcss.all, sty.freeBox__ggjL)}
-                >
-                  {(_par => (!_par ? [] : Array.isArray(_par) ? _par : [_par]))(
-                    (() => {
-                      try {
-                        return $queries.query.data;
-                      } catch (e) {
-                        if (
-                          e instanceof TypeError ||
-                          e?.plasmicType === "PlasmicUndefinedDataError"
-                        ) {
-                          return [];
+                {(
+                  hasVariant(globalVariants, "screen", "desktopOnly")
+                    ? (() => {
+                        try {
+                          return true;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return true;
+                          }
+                          throw e;
                         }
-                        throw e;
-                      }
-                    })()
-                  ).map((__plasmic_item_0, __plasmic_idx_0) => {
-                    const currentItem = __plasmic_item_0;
-                    const currentIndex = __plasmic_idx_0;
-                    return (
-                      <Bubble
-                        data-plasmic-name={"bubble"}
-                        data-plasmic-override={overrides.bubble}
-                        className={classNames("__wab_instance", sty.bubble)}
-                        key={currentIndex}
-                        msg={
-                          hasVariant(globalVariants, "screen", "desktopOnly")
-                            ? (() => {
-                                try {
-                                  return currentItem.Message;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
+                      })()
+                    : true
+                ) ? (
+                  <p.Stack
+                    as={"div"}
+                    hasGap={true}
+                    className={classNames(projectcss.all, sty.freeBox__ggjL)}
+                  >
+                    {(_par =>
+                      !_par ? [] : Array.isArray(_par) ? _par : [_par])(
+                      (() => {
+                        try {
+                          return $queries.query.data;
+                        } catch (e) {
+                          if (
+                            e instanceof TypeError ||
+                            e?.plasmicType === "PlasmicUndefinedDataError"
+                          ) {
+                            return [];
+                          }
+                          throw e;
+                        }
+                      })()
+                    ).map((__plasmic_item_0, __plasmic_idx_0) => {
+                      const currentItem = __plasmic_item_0;
+                      const currentIndex = __plasmic_idx_0;
+                      return (
+                        <Bubble
+                          data-plasmic-name={"bubble"}
+                          data-plasmic-override={overrides.bubble}
+                          className={classNames("__wab_instance", sty.bubble)}
+                          key={currentIndex}
+                          msg={
+                            hasVariant(globalVariants, "screen", "desktopOnly")
+                              ? (() => {
+                                  try {
+                                    return currentItem.Message;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
                                   }
-                                  throw e;
-                                }
-                              })()
-                            : undefined
-                        }
-                        name={
-                          hasVariant(globalVariants, "screen", "desktopOnly")
-                            ? (() => {
-                                try {
-                                  return currentItem.Name;
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
+                                })()
+                              : undefined
+                          }
+                          name={
+                            hasVariant(globalVariants, "screen", "desktopOnly")
+                              ? (() => {
+                                  try {
+                                    return currentItem.Name;
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
                                   }
-                                  throw e;
-                                }
-                              })()
-                            : undefined
-                        }
-                        notMe={
-                          hasVariant(globalVariants, "screen", "desktopOnly")
-                            ? (() => {
-                                try {
-                                  return (
-                                    currentItem.Name !== $state.currentPerson
-                                  );
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return [];
+                                })()
+                              : undefined
+                          }
+                          notMe={
+                            hasVariant(globalVariants, "screen", "desktopOnly")
+                              ? (() => {
+                                  try {
+                                    return (
+                                      currentItem.Name !== $state.currentPerson
+                                    );
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return [];
+                                    }
+                                    throw e;
                                   }
-                                  throw e;
-                                }
-                              })()
-                            : undefined
-                        }
-                        time={
-                          hasVariant(globalVariants, "screen", "desktopOnly")
-                            ? (() => {
-                                try {
-                                  return new Date(
-                                    currentItem["send time"]
-                                  ).toLocaleString("en-US", {
-                                    month: "short",
-                                    day: "numeric",
-                                    hour: "numeric",
-                                    minute: "numeric",
-                                    second: "numeric",
-                                    hour12: true
-                                  });
-                                } catch (e) {
-                                  if (
-                                    e instanceof TypeError ||
-                                    e?.plasmicType ===
-                                      "PlasmicUndefinedDataError"
-                                  ) {
-                                    return undefined;
+                                })()
+                              : undefined
+                          }
+                          time={
+                            hasVariant(globalVariants, "screen", "desktopOnly")
+                              ? (() => {
+                                  try {
+                                    return new Date(
+                                      currentItem["send time"]
+                                    ).toLocaleString("en-US", {
+                                      month: "short",
+                                      day: "numeric",
+                                      hour: "numeric",
+                                      minute: "numeric",
+                                      second: "numeric",
+                                      hour12: true
+                                    });
+                                  } catch (e) {
+                                    if (
+                                      e instanceof TypeError ||
+                                      e?.plasmicType ===
+                                        "PlasmicUndefinedDataError"
+                                    ) {
+                                      return undefined;
+                                    }
+                                    throw e;
                                   }
-                                  throw e;
-                                }
-                              })()
-                            : undefined
-                        }
-                      />
-                    );
-                  })}
-                </p.Stack>
+                                })()
+                              : undefined
+                          }
+                        />
+                      );
+                    })}
+                  </p.Stack>
+                ) : null}
                 <div className={classNames(projectcss.all, sty.freeBox__hs7Nf)}>
                   <TextInput
                     data-plasmic-name={"textInput"}
@@ -674,43 +726,6 @@ function PlasmicHomepage__RenderFunc(props: {
                 </div>
               </div>
             ) : null}
-            <Button
-              children={null}
-              className={classNames("__wab_instance", sty.button__zftkE)}
-            />
-
-            <Timer
-              data-plasmic-name={"timer"}
-              data-plasmic-override={overrides.timer}
-              className={classNames("__wab_instance", sty.timer)}
-              intervalSeconds={1}
-              isRunning={true}
-              onTick={async () => {
-                const $steps = {};
-
-                $steps["airtableGetList"] = true
-                  ? (() => {
-                      const actionArgs = {
-                        queryInvalidation: ["plasmic_refresh_all"]
-                      };
-                      return (async ({ queryInvalidation }) => {
-                        if (!queryInvalidation) {
-                          return;
-                        }
-                        await plasmicInvalidate(queryInvalidation);
-                      })?.apply(null, [actionArgs]);
-                    })()
-                  : undefined;
-                if (
-                  $steps["airtableGetList"] != null &&
-                  typeof $steps["airtableGetList"] === "object" &&
-                  typeof $steps["airtableGetList"].then === "function"
-                ) {
-                  $steps["airtableGetList"] = await $steps["airtableGetList"];
-                }
-              }}
-              runWhileEditing={false}
-            />
           </section>
         </div>
       </div>
@@ -719,13 +734,13 @@ function PlasmicHomepage__RenderFunc(props: {
 }
 
 const PlasmicDescendants = {
-  root: ["root", "section", "bubble", "textInput", "svg", "send", "timer"],
-  section: ["section", "bubble", "textInput", "svg", "send", "timer"],
+  root: ["root", "section", "timer", "bubble", "textInput", "svg", "send"],
+  section: ["section", "timer", "bubble", "textInput", "svg", "send"],
+  timer: ["timer"],
   bubble: ["bubble"],
   textInput: ["textInput", "svg"],
   svg: ["svg"],
-  send: ["send"],
-  timer: ["timer"]
+  send: ["send"]
 } as const;
 type NodeNameType = keyof typeof PlasmicDescendants;
 type DescendantsType<T extends NodeNameType> =
@@ -733,11 +748,11 @@ type DescendantsType<T extends NodeNameType> =
 type NodeDefaultElementType = {
   root: "div";
   section: "section";
+  timer: typeof Timer;
   bubble: typeof Bubble;
   textInput: typeof TextInput;
   svg: "svg";
   send: typeof Button;
-  timer: typeof Timer;
 };
 
 type ReservedPropsType = "variants" | "args" | "overrides";
@@ -801,11 +816,11 @@ export const PlasmicHomepage = Object.assign(
   {
     // Helper components rendering sub-elements
     section: makeNodeComponent("section"),
+    timer: makeNodeComponent("timer"),
     bubble: makeNodeComponent("bubble"),
     textInput: makeNodeComponent("textInput"),
     svg: makeNodeComponent("svg"),
     send: makeNodeComponent("send"),
-    timer: makeNodeComponent("timer"),
 
     // Metadata about props expected for PlasmicHomepage
     internalVariantProps: PlasmicHomepage__VariantProps,
