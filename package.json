@@ -1,7 +1,7 @@
 {
   "name": "tmp-cpa",
   "version": "0.1.0",
-  "homepage": "https://username.github.io/ChatReact",
+  "homepage": "https://MrBiscuit.github.io/ChatReact",
   "private": true,
   "dependencies": {
     "@plasmicapp/cli": "^0.1.322",
