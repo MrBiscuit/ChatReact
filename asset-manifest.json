@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ChatReact/static/css/main.414b7fbb.css",
+    "main.js": "/ChatReact/static/js/main.fed92e5a.js",
+    "static/js/787.c4904023.chunk.js": "/ChatReact/static/js/787.c4904023.chunk.js",
+    "index.html": "/ChatReact/index.html",
+    "main.414b7fbb.css.map": "/ChatReact/static/css/main.414b7fbb.css.map",
+    "main.fed92e5a.js.map": "/ChatReact/static/js/main.fed92e5a.js.map",
+    "787.c4904023.chunk.js.map": "/ChatReact/static/js/787.c4904023.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.414b7fbb.css",
+    "static/js/main.fed92e5a.js"
+  ]
+}
