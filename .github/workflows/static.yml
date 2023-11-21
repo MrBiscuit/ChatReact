@@ -45,7 +45,8 @@ jobs:
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
-        with:
-          BRANCH: gh-pages  # The branch the action should deploy to.
-          FOLDER: build     # The folder the action should deploy.
-          CLEAN: true       # Automatically remove deleted files from the deploy branch
+       with:
+    token: ${{ secrets.DEPLOY_TOKEN }}  # Use the PAT stored in your secrets
+    branch: gh-pages  # The branch the action should deploy to.
+    folder: build     # The folder the action should deploy.
+    clean: true       # Automatically remove deleted files from the deploy branch
