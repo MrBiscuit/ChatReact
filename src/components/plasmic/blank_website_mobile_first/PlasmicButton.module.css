@@ -26,7 +26,7 @@
   margin-left: 8px;
 }
 .rootshowStartIcon {
-  padding-left: 16px;
+  padding-left: 8px;
 }
 .rootshowEndIcon {
   padding-right: 16px;
@@ -94,7 +94,7 @@
   background: #ffffff00;
 }
 .rootshape_rounded_showStartIcon {
-  padding-left: 16px;
+  padding-left: 0px;
 }
 .rootshowEndIcon_shape_rounded {
   padding-right: 16px;

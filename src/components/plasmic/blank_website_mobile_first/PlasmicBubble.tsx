@@ -177,39 +177,14 @@ function PlasmicBubble__RenderFunc(props: {
             className={classNames(
               projectcss.all,
               projectcss.__wab_text,
-              sty.text__xuVjm
-            )}
-          >
-            <React.Fragment>
-              {(() => {
-                try {
-                  return $props.name;
-                } catch (e) {
-                  if (
-                    e instanceof TypeError ||
-                    e?.plasmicType === "PlasmicUndefinedDataError"
-                  ) {
-                    return "text here";
-                  }
-                  throw e;
-                }
-              })()}
-            </React.Fragment>
-          </div>
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text__pivq5
-            )}
-          >
-            {":\u00a0"}
-          </div>
-          <div
-            className={classNames(
-              projectcss.all,
-              projectcss.__wab_text,
-              sty.text__icPsB
+              sty.text__icPsB,
+              {
+                [sty.textnotMe__icPsBp7DnS]: hasVariant(
+                  $state,
+                  "notMe",
+                  "notMe"
+                )
+              }
             )}
           >
             <React.Fragment>
